@@ -1,0 +1,30 @@
+  
+
+  {{ if .Parent }}
+  <h4>Parent</h4>
+  <code>{{ .Parent.File.Path }}</code>
+  {{ end }}
+
+	<h3>Page のプロパティ</h2>
+	<table class="table debug-table">
+		<thead>
+			<tr><th>Attr</th><th>Value</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>.Title</td><td>{{.Title}}</td></tr>
+			<tr><td>.Kind</td><td>{{.Kind}}</td></tr>
+			<tr><td>.Type</td><td>{{.Type}}</td></tr>
+			<tr><td>.CurrentSection</td><td>{{.CurrentSection}}</td></tr>
+			<tr><td>.Section</td><td>{{.Section}}</td></tr>
+			<tr><td>.RelPermalink</td><td>{{.RelPermalink}}</td></tr>
+			<tr><td>.Permalink</td><td>{{.Permalink}}</td></tr>
+			<tr><td>.BundleType</td><td>{{.BundleType}}</td></tr>
+			<tr><td>.Draft</td><td>{{.Draft}}</td></tr>
+			<tr><td>.Date</td><td>{{.Date}}</td></tr>
+			<tr><td>.IsNode</td><td>{{.IsNode}}</td></tr>
+			<tr><td>.File.Path</td><td>{{.File.Path}}</td></tr>
+			<tr><td>.File.UniqueID</td><td>{{.File.UniqueID}}</td></tr>
+		</tbody>
+	</table>
+
+

@@ -1,0 +1,66 @@
+Categories
+
+{{ partial "debug/hugo-debug" . }}
+
+{{ block "main" . }}
+
+{{ if eq .Kind "taxonomy" }}
+  <!-- Taxonomy 向けテンプレート -->
+  <h3>Terms in Taxonomy <code>{{.Section}}</code></h3>
+
+  {{.Section}} が含む term のリスト (.Data.Pages)
+  {{ partial "debug/pages" .Data.Pages }}
+
+  <h4>`.Data.Terms` のエントリ</h4>
+  <ul>
+  {{ range $term, $pages := .Data.Terms }}
+  <li>term: <a href="{{"/" | relLangURL}}{{$.Section|urlize}}/{{$term|urlize}}">{{ $term }}</a>
+    <ul>
+      {{ range $pages }}
+      <li> <a href="{{.Permalink}}">{{.RelPermalink}}</a></li>
+      {{ end }}
+    </ul>
+  </li>
+  {{ end }}
+  </ul>
+  {{/*
+  */}}
+ 
+
+  <h2>概要</h2>
+{{ else  if eq .Kind "term" }}
+  <h3 id="term">Term Info</h3>
+
+  <h4> {{.CurrentSection.Title}}=<code>{{.Title}}</code> を含むページ (.Data.Pages) </h4>
+
+  {{ partial "debug/pages" .Data.Pages }}
+
+  <h4> .Data.Terms </h4>
+  {{ printf "%T" .Data.Terms }}
+  <h3 id="term">Taxonomy Info</h3>
+  {{ .Kind }}
+  <h4> <code>{{.Title}}</code> の要素 (.Data.Pages : Pages)</h4>
+  {{ partial "debug/pages" .Data.Pages }}
+
+  <h4> .Data.Terms </h4>
+  .Data.Terms. {{ printf "%T" .Data.Terms }}
+  <ul>
+  {{ range $k, $v := .Data.Terms }}
+    <li>{{$k }} : {{ printf "%T" $k }} -> {{ $v }}</li>
+  {{ end }}
+  </ul>
+
+  <h3>All Taxonomies in Site.</h3>
+  <ul>
+  {{ range $term, $taxonomy := .Site.Taxonomies }}
+  <li>{{$term}} : {{printf "%T" $term }} -> {{$taxonomy}} : {{printf "%T" $taxonomy}}</li>
+  {{ end }}
+  </ul>
+{{ end }}
+
+{{ end}}
+{{ define "template-info" }}
+<code>/layouts/categories/category.terms.html.html</code> of Hugo Debug
+{{ end }}
+
+

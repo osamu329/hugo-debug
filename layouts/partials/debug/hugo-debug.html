@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $styles := resources.Get "hugo-debug.css" | toCSS | minify | fingerprint }}
+  {{/*
+{{- $styles := resources.Get "hugo-debug.css" | resources.ExecuteAsTemplate "hugo-debug.scss" . | resources.ToCSS }}
+*/}}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" {{ template "integrity" $styles }}>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <title>Debug for {{.Title}}</title>
+</head>
+<body style="margin:1em">
+
+<div class="columns">
+  <div class="column is-one-fifth">
+    {{ template "debug-navbar" . }}
+  </div>
+
+  <div class="column">
+    {{ partial "debug/breadcrum" . }} 
+    <hr>
+    <div class="content">
+
+
+    <h2> Debug Information for <code>{{.File.Path}}</code> </h2>
+    Template: {{ block "template-info" . }}
+    <code>/layouts/_default/aseof.html</code> of Hugo Debug
+    {{ end }}
+  
+    {{ partial "debug/page-kind" . }}
+    {{ partial "debug/page" . }}
+
+    {{ block "main" . }}
+    {{ end }}
+
+    <h4>セクション</h4> 
+    <h5>.CurrentSection : Page</h5>
+    {{ if .CurrentSection}}
+      {{ partial "debug/pages" (slice .CurrentSection) }}
+    {{ else }}
+      No Current Section.
+    {{ end }}
+
+    <h5>.FirstSection : Page</h5>
+    {{ if .FirstSection}}
+      {{ partial "debug/pages" (slice .FirstSection) }}
+    {{ else }}
+      No Current Section.
+    {{ end }}
+
+
+    <h4>Pages 情報</h4>
+    <h5>.Parent : Pages </h5> 
+    {{ if .Parent }}
+      {{ partial "debug/pages" (slice .Parent) }}
+    {{ else }}
+      No Parent.
+    {{ end }}
+
+    <h5>.Site.Pages : Pages</h5>
+    {{ partial "debug/pages" .Site.Pages }}
+
+    <h5> .Summary </h5>
+    <h5> .RawContent </h5>
+    <pre>{{ .RawContent }}</pre>
+
+    <h4 id="resources">Resources <a href="https://gohugo.io/content-management/page-resources/#readout">doc</a></h4>
+    {{ partial "debug/resources" .Resources }}
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+{{ define "debug-navbar" }}
+{{ end }}
+
+
+{{- define "integrity" -}}
+  {{- if (urls.Parse .Permalink).Host -}}
+    integrity="{{ .Data.Integrity }}" crossorigin="anonymous"
+  {{- end -}}
+{{- end -}}

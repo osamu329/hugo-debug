@@ -1,0 +1,9 @@
+{{ if . }}
+<table class="table">
+{{ range . }}
+  <tr><td>.ResourceType</td><td>{{.ResourceType}}</td></tr>
+  <tr><td>.Name</td><td>{{.Name}}</td></tr>
+  <tr><td>.Title</td><td>{{.Title}}</td></tr>
+{{ end }}
+</table>
+{{ end }}

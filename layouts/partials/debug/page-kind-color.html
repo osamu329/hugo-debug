@@ -1,0 +1,8 @@
+{{/* return color class for Page kind */}}
+{{ $colormap := ( dict
+  "home" "is-warning"
+  "section" "is-success"
+  "page" "is-info"
+  "taxonomy" "is-light"
+  ) -}}
+{{ default "" (index $colormap . )}} 

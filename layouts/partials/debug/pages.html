@@ -1,0 +1,46 @@
+{{ if . }}
+		<table class="table">
+			<thead>
+        <tr>
+					<td>.Kind</td>
+					<td>.Section</td>
+					<td>.Type</td>
+					<td>.BundleType</td>
+					<td>.File.Path</td>
+					<td>.Title</td>
+					<td>.Weight</td>
+					<td>.IsNode</td>
+		{{/*
+					<td>.IsHome</td>
+					<td>.IsSection</td>
+					<td>.IsPage</td>
+		*/}}
+					<td>link</td>
+			</thead>
+			<tbody>
+	{{ range . }}
+  <tr>
+    <td>
+		<a href="{{.Permalink}}">
+      <span class="tag {{ partial "debug/page-kind-color" .Kind }}">{{.Kind}}</span>
+    </a>
+    </td>
+		<td>{{.Section}}</td>
+		<td>{{.Type}}</td>
+		<td>{{.BundleType}}</td>
+		<td>{{.File.Path}}</td>
+		<td>{{.Title}}</td>
+		<td>{{.Weight}}</td>
+		<td>{{if .IsNode}}Yes{{else}} - {{end}}</td>
+		{{/*
+		<td>{{if .IsHome}}Yes{{else}} - {{end}}</td>
+		<td>{{if .IsSection}}Yes{{else}} - {{end}}</td>
+		<td>{{if .IsPage}}Yes{{else}} - {{end}}</td>
+		*/}}
+		<td><a href="{{.Permalink}}">link</a>
+	</tr>
+	{{ end }}
+			</tbody>
+		</table>
+{{end}}
+

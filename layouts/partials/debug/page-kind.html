@@ -1,0 +1,11 @@
+{{ if . }}
+<div class="field is-grouped is-grouped-multiline">
+  <div class="control">
+    <div class="tags has-addons">
+      <span class="tag is-medium is-dark">kind</span>
+      <span class="tag is-medium {{ partial "debug/page-kind-color" .Kind }}">{{.Kind}}</span>
+    </div>
+  </div>
+</div>
+{{ end }}
+

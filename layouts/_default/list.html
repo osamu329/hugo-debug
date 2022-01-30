@@ -1,0 +1,9 @@
+{{ define "template-info" }}
+<code>/layouts/_defaults/list.html</code> of Hugo Debug
+{{ end }}
+
+{{ define "main"}}
+  <h5>.Pages の要素一覧</h5>
+    {{ partial "debug/pages" .Pages }}
+
+{{ end }}
